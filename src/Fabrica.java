@@ -7,13 +7,16 @@ public class Fabrica {
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Introduce el número de productos que va a crear cada operario: ");
-        System.out.println("Introduce la capacidad del deposito de producción: ");
-        System.out.println("Introduce la capacidad del deposito de distribución: ");
-        
         int numProductos = scanner.nextInt();
+
+        System.out.println("Introduce la capacidad del deposito de producción: ");
         int capDepProd = scanner.nextInt();
-        int capDepDist = scanner.nextInt();
         
+        System.out.println("Introduce la capacidad del deposito de distribución: ");
+        int capDepDist = scanner.nextInt();
+
+        scanner.close();
+
         Productor productorA1 = new Productor(Productor.TipoProductor.A, numProductos);
         Productor productorA2 = new Productor(Productor.TipoProductor.A, numProductos);
         Productor productorB1 = new Productor(Productor.TipoProductor.B, numProductos);
@@ -30,7 +33,8 @@ public class Fabrica {
         DepositoProduccion depProd = new DepositoProduccion(capDepProd);
         DepositoDistribucion depDist = new DepositoDistribucion(capDepDist);
         Cinta cinta = new Cinta();
-        
+
+
     }
 }
 
