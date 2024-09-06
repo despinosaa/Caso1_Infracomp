@@ -2,7 +2,7 @@ public class Producto {
 
     // Tipo producto
     public enum TipoProducto {
-        A, B
+        A, FIN_A, B, FIN_B
     } 
 
     // Atributos

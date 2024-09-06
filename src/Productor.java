@@ -13,29 +13,24 @@ public class Productor {
     public Productor (TipoProductor tipo, int numProductos) {
         this.tipo = tipo;
         this.numProductos = numProductos;
-    }
-
-    // Getters y Setters
-    public TipoProductor getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoProductor tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getNumProductos() {
-        return numProductos;
-    }
-
-    public void setNumProductos(int numProductos) {
-        this.numProductos = numProductos;
+        toString();
+        crearProductos();
     }
 
     @Override
     public String toString() {
-        return "Productor [tipo=" + tipo + ", numProductos=" + numProductos + "]";
+        return "Productor [tipo=" + tipo + ", numProductos=" + numProductos + "] se ha creado";
     }
     
+    private void crearProductos() {
+        for (int i = 0; i < numProductos-1; i++) {
+            Producto producto = new Producto(Producto.TipoProducto.valueOf(tipo.toString()));
+            System.out.println("Se ha creado: "+producto);
+        }
+        Producto producto = new Producto(Producto.TipoProducto.valueOf("FIN_"+tipo.toString()));
+        System.out.println("Se ha creado: "+producto);
+
+    }
+
 
 }
