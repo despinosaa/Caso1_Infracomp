@@ -17,7 +17,10 @@ public class Fabrica {
 
         scanner.close();
 
-        Productor productorA1 = new Productor(Productor.TipoProductor.B, numProductos);
+        DepositoProduccion depProd = new DepositoProduccion(capDepProd);
+        DepositoDistribucion depDist = new DepositoDistribucion(capDepDist);
+
+        Productor productorA1 = new Productor(Productor.TipoProductor.B, numProductos, depProd);
         // Productor productorA2 = new Productor(Productor.TipoProductor.A, numProductos);
         // Productor productorB1 = new Productor(Productor.TipoProductor.B, numProductos);
         // Productor productorB2 = new Productor(Productor.TipoProductor.B, numProductos);
@@ -30,8 +33,7 @@ public class Fabrica {
         Interno interno1 = new Interno(Interno.TipoInterno.I1);
         Interno interno2 = new Interno(Interno.TipoInterno.I2);
 
-        DepositoProduccion depProd = new DepositoProduccion(capDepProd);
-        DepositoDistribucion depDist = new DepositoDistribucion(capDepDist);
+        
         Cinta cinta = new Cinta();
 
         
