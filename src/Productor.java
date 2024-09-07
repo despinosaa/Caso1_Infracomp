@@ -1,4 +1,4 @@
-public class Productor {
+public class Productor extends Thread {
     
     // Tipo productor
     public enum TipoProductor {
@@ -16,7 +16,6 @@ public class Productor {
         this.numProductos = numProductos;
         this.depProd = depProd;
         toString();
-        crearProductos();
     }
 
     @Override
@@ -37,7 +36,9 @@ public class Productor {
 
     }
 
-    private void agregarProducto(DepositoProduccion depProd) {
+    @Override
+    public void run() {
+        crearProductos();
     }
 
 }

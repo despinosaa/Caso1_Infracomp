@@ -20,23 +20,36 @@ public class Fabrica {
         DepositoProduccion depProd = new DepositoProduccion(capDepProd);
         DepositoDistribucion depDist = new DepositoDistribucion(capDepDist);
 
-        Productor productorA1 = new Productor(Productor.TipoProductor.B, numProductos, depProd);
-        // Productor productorA2 = new Productor(Productor.TipoProductor.A, numProductos);
-        // Productor productorB1 = new Productor(Productor.TipoProductor.B, numProductos);
-        // Productor productorB2 = new Productor(Productor.TipoProductor.B, numProductos);
+        Productor productorA1 = new Productor(Productor.TipoProductor.A, numProductos, depProd);
+        Productor productorA2 = new Productor(Productor.TipoProductor.A, numProductos,depProd);
+        Productor productorB1 = new Productor(Productor.TipoProductor.B, numProductos,depProd);
+        Productor productorB2 = new Productor(Productor.TipoProductor.B, numProductos,depProd);
          
         Distribuidor distribuidorA1 = new Distribuidor(Distribuidor.TipoDistribuidor.A);
         Distribuidor distribuidorA2 = new Distribuidor(Distribuidor.TipoDistribuidor.A);
         Distribuidor distribuidorB1 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
         Distribuidor distribuidorB2 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
 
-        Interno interno1 = new Interno(Interno.TipoInterno.I1);
+        Interno1 interno1 = new Interno1(depProd);
         Interno interno2 = new Interno(Interno.TipoInterno.I2);
 
-        
+
         Cinta cinta = new Cinta();
 
-        
+        productorA1.start();
+        productorA2.start();
+        productorB1.start();
+        productorB2.start();
+        interno1.start();
+        // for (int i = 0; i < numProductos; i++) {
+        //     depProd.agarrarProducto();
+        // }
+
+        // while (true) {
+        //     depProd.agarrarProducto();
+        //     Thread.yield();
+        // }
+
     }
 }
 

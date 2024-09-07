@@ -4,7 +4,7 @@ public class DepositoProduccion {
 
     // Atributos
     private int capDepProd;
-    private ArrayList productos = new ArrayList();
+    private ArrayList<Producto> productos = new ArrayList();
 
     // Constructor
     public DepositoProduccion(int capDepProd) {
@@ -28,6 +28,7 @@ public class DepositoProduccion {
     
     public synchronized void agregarProducto(Producto producto) {
         while (capDepProd == productos.size()) {
+
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -37,6 +38,32 @@ public class DepositoProduccion {
         productos.add(producto);
         System.out.println("Al deposito de producción se ha agregado: "+producto);
         notifyAll();
+    }
+
+    // public synchronized Producto agarrarProducto() throws InterruptedException {
+    //     Producto producto;
+
+    //     while (0 == productos.size()) {
+    //         Thread.yield();
+            
+    //     }
+    //     producto = productos.get(0);
+    //     productos.remove(0);
+    //     System.out.println("Del deposito de producción se ha agarrado: "+producto);
+    //     notifyAll();
+    //     return producto;
+    // }
+    public synchronized Producto agarrarProducto() {
+        Producto producto;
+
+        if (0 == productos.size()) {
+            return null;
+        }
+        producto = productos.get(0);
+        productos.remove(0);
+        System.out.println("Del deposito de producción se ha agarrado: "+producto);
+        notifyAll();
+        return producto;
     }
 
 }
