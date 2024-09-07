@@ -30,11 +30,12 @@ public class Fabrica {
         Distribuidor distribuidorB1 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
         Distribuidor distribuidorB2 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
 
-        Interno1 interno1 = new Interno1(depProd);
+        Cinta cinta = new Cinta();
+
+        Interno1 interno1 = new Interno1(depProd, cinta);
         Interno interno2 = new Interno(Interno.TipoInterno.I2);
 
 
-        Cinta cinta = new Cinta();
 
         productorA1.start();
         productorA2.start();

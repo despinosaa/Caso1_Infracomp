@@ -2,12 +2,14 @@ public class Interno1 extends Thread {
 
     private int contadorFin = 0;
     private DepositoProduccion depProd;
+    private Cinta cinta;
 
     
     // Constructor
-    public Interno1(DepositoProduccion depProd) {
+    public Interno1(DepositoProduccion depProd, Cinta cinta) {
         System.out.println("Interno1 se ha creado");
         this.depProd = depProd;
+        this.cinta = cinta;
     }
 
     @Override
@@ -26,8 +28,11 @@ public class Interno1 extends Thread {
     private void agarrarDepProd() {
 
         Producto producto = depProd.agarrarProducto();
-        if (producto != null && (producto.getTipo() == Producto.TipoProducto.FIN_A || producto.getTipo() == Producto.TipoProducto.FIN_B)) {
+        if (producto != null){
+            cinta.agregarProducto(producto);
+            if (producto.getTipo() == Producto.TipoProducto.FIN_A || producto.getTipo() == Producto.TipoProducto.FIN_B) {
             contadorFin++;
+            }
         }
     }
 
