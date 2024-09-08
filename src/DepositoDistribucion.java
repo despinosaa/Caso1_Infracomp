@@ -73,7 +73,6 @@ public class DepositoDistribucion {
             notifyAll();  
             return producto;
         }
-        
         return null;
     }
 }
