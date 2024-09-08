@@ -45,24 +45,32 @@ public class DepositoDistribucion {
 
     public synchronized Producto agarrarProducto(Distribuidor distribuidor){
         if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.A) {
-            if (productosA.size() == 0) {
-                return null;
+            while (productosA.size() == 0) {  
+                try {
+                    wait();  
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             Producto producto = productosA.get(0);
             productosA.remove(0);
-            System.out.println("Del DEPÓSITO DE PRODUCCIÓN se ha agarrado: "+producto);
-            notifyAll();
+            System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
+            notifyAll();  
             return producto;
         }
-        
+    
         if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.B) {
-            if (productosB.size() == 0) {
-                return null; // Retorna null si no hay productos B
+            while (productosB.size() == 0) {  
+                try {
+                    wait();  
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             Producto producto = productosB.get(0);
             productosB.remove(0);
-            System.out.println("Del DEPÓSITO DE PRODUCCIÓN se ha agarrado: "+producto);
-            notifyAll();
+            System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
+            notifyAll();  
             return producto;
         }
         

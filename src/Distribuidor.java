@@ -47,8 +47,6 @@ public class Distribuidor extends Thread{
                     System.out.println("El Distribuidor " + tipo + " ha encontrado " + tipoproducto + "y ha terminado.");
                 }
             }
-            Thread.yield();
         }
     }
-    
 }
