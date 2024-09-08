@@ -41,8 +41,13 @@ public class Fabrica {
         productorA2.start();
         productorB1.start();
         productorB2.start();
+        distribuidorA1.start();
+        distribuidorA2.start();
+        distribuidorB1.start();
+        distribuidorB2.start();
         interno1.start();
         interno2.start();
+
         // for (int i = 0; i < numProductos; i++) {
         //     depProd.agarrarProducto();
         // }
