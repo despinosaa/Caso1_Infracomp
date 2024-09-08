@@ -4,7 +4,8 @@ public class DepositoDistribucion {
     
     // Atributos
     private int capDepDist;
-    private ArrayList<Producto> productos = new ArrayList();
+    private ArrayList<Producto> productosA = new ArrayList();
+    private ArrayList<Producto> productosB = new ArrayList<>();
 
     // Constructor
     public DepositoDistribucion(int capDepDist) {
@@ -26,32 +27,45 @@ public class DepositoDistribucion {
     }
     
     public synchronized void agregarProducto(Producto producto){
-        while (capDepDist == productos.size()) {
+        while (capDepDist == (productosA.size() + productosB.size())) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        productos.add(producto);
-        System.out.println("Al DEPÓSITO DE DISTRIBUCION se ha agregado: "+producto);
+        if (producto.getTipo() == Producto.TipoProducto.A || producto.getTipo() == Producto.TipoProducto.FIN_A) {
+            productosA.add(producto);
+        } else if (producto.getTipo() == Producto.TipoProducto.B || producto.getTipo() == Producto.TipoProducto.FIN_B) {
+            productosB.add(producto);
+        }
+        System.out.println("Al DEPÓSITO DE DISTRIBUCIÓN se ha agregado: " + producto);
         notifyAll();
     }
 
-    public synchronized Producto agarrarProducto(Distribuidor distribuidor) {
-        if (0 == productos.size()) {
-            return null;
+    public synchronized Producto agarrarProducto(Distribuidor distribuidor){
+        if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.A) {
+            if (productosA.size() == 0) {
+                return null;
+            }
+            Producto producto = productosA.get(0);
+            productosA.remove(0);
+            System.out.println("Del DEPÓSITO DE PRODUCCIÓN se ha agarrado: "+producto);
+            notifyAll();
+            return producto;
         }
-        for (int i = 0; i < productos.size(); i++){
-            Producto producto = productos.get(i);
-            if (producto.toString() == distribuidor.toString() && (producto.toString().contains(distribuidor.toString()))) {
-                productos.remove(i);
-                System.out.println("Del DEPÓSITO DE DISTRIBUCION se ha agarrado: "+producto);
-                notifyAll();
-                return producto;
-            }   
+        
+        if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.B) {
+            if (productosB.size() == 0) {
+                return null; // Retorna null si no hay productos B
+            }
+            Producto producto = productosB.get(0);
+            productosB.remove(0);
+            System.out.println("Del DEPÓSITO DE PRODUCCIÓN se ha agarrado: "+producto);
+            notifyAll();
+            return producto;
         }
+        
         return null;
     }
-
 }

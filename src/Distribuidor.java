@@ -30,16 +30,21 @@ public class Distribuidor extends Thread{
         return "" + tipo + "";
     }
 
-    private void agarrarDepPDist() {
+    @Override
+    public void run() {
+        consumirProductos();
+    }
 
+    private void consumirProductos() {
         boolean continuar = true;
         while(continuar){
             Producto producto = depDist.agarrarProducto(this);
             if(producto != null){
-                System.out.println("Distribuidor " + tipo + " ha retirado: " + producto);
-                if((producto.toString().contains("FIN"))){
+                System.out.println("El Distribuidor " + tipo + " ha retirado: " + producto);
+                if((producto.getTipo() == Producto.TipoProducto.FIN_A) || (producto.getTipo() == Producto.TipoProducto.FIN_B)){
                     continuar = false;
-                    System.out.println("Distribuidor " + tipo + " ha encontrado FIN" + tipo + "y ha terminado.");
+                    Producto.TipoProducto tipoproducto = producto.getTipo();
+                    System.out.println("El Distribuidor " + tipo + " ha encontrado " + tipoproducto + "y ha terminado.");
                 }
             }
             Thread.yield();
