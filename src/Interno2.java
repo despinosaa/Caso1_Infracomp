@@ -15,9 +15,9 @@ public class Interno2 extends Thread{
         while(contadorFin < 4) {
             agarrarCinta();
             if (contadorFin == 4) {
-                System.out.println("******************************");
-                System.out.println("Interno2 ha encontrado los 4 FIN");
-                System.out.println("******************************");
+                System.out.println("******************************\n" +
+                "Interno2 ha encontrado los 4 FIN\n" +
+                "******************************");
             }
             Thread.yield();
         }

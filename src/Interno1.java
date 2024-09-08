@@ -17,9 +17,9 @@ public class Interno1 extends Thread {
         while(contadorFin < 4) {
             agarrarDepProd();
             if (contadorFin == 4) {
-                System.out.println("******************************");
-                System.out.println("Interno1 ha encontrado los 4 FIN");
-                System.out.println("******************************");
+                System.out.println("******************************\n" +
+                "Interno1 ha encontrado los 4 FIN\n" +
+                "******************************");
             }
             Thread.yield();
         }
