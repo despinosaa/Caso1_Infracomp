@@ -1,4 +1,4 @@
-public class Distribuidor {
+public class Distribuidor extends Thread{
     
     // Tipo productor
     public enum TipoDistribuidor {
@@ -28,6 +28,22 @@ public class Distribuidor {
     @Override
     public String toString() {
         return "Distribuidor [tipo=" + tipo + "]";
+    }
+
+    private void agarrarDepPDist() {
+
+        boolean continuar = true;
+        while(continuar){
+            Producto producto = depDist.agarrarProducto(this);
+            if(producto != null){
+                System.out.println("Distribuidor " + tipo + " ha retirado: " + producto);
+                if((producto.toString().contains("FIN"))){
+                    continuar = false;
+                    System.out.println("Distribuidor " + tipo + " ha encontrado FIN" + tipo + "y ha terminado.");
+                }
+            }
+            Thread.yield();
+        }
     }
     
 }

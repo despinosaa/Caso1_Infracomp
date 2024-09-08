@@ -38,16 +38,20 @@ public class DepositoDistribucion {
         notifyAll();
     }
 
-    public synchronized Producto agarrarProducto() {
-        Producto producto;
+    public synchronized Producto agarrarProducto(Distribuidor distribuidor) {
         if (0 == productos.size()) {
             return null;
         }
-        producto = productos.get(0);
-        productos.remove(0);
-        System.out.println("Del DEPÓSITO DE DISTRIBUCION se ha agarrado: "+producto);
-        notifyAll();
-        return producto;
+        for (int i = 0; i < productos.size(); i++){
+            Producto producto = productos.get(i);
+            if (producto.toString() == distribuidor.toString() && (producto.toString().contains(distribuidor.toString()))) {
+                productos.remove(i);
+                System.out.println("Del DEPÓSITO DE DISTRIBUCION se ha agarrado: "+producto);
+                notifyAll();
+                return producto;
+            }   
+        }
+        return null;
     }
 
 }
