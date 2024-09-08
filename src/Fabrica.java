@@ -25,15 +25,15 @@ public class Fabrica {
         Productor productorB1 = new Productor(Productor.TipoProductor.B, numProductos,depProd);
         Productor productorB2 = new Productor(Productor.TipoProductor.B, numProductos,depProd);
          
-        Distribuidor distribuidorA1 = new Distribuidor(Distribuidor.TipoDistribuidor.A);
-        Distribuidor distribuidorA2 = new Distribuidor(Distribuidor.TipoDistribuidor.A);
-        Distribuidor distribuidorB1 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
-        Distribuidor distribuidorB2 = new Distribuidor(Distribuidor.TipoDistribuidor.B);
+        Distribuidor distribuidorA1 = new Distribuidor(Distribuidor.TipoDistribuidor.A, depDist);
+        Distribuidor distribuidorA2 = new Distribuidor(Distribuidor.TipoDistribuidor.A, depDist);
+        Distribuidor distribuidorB1 = new Distribuidor(Distribuidor.TipoDistribuidor.B, depDist);
+        Distribuidor distribuidorB2 = new Distribuidor(Distribuidor.TipoDistribuidor.B, depDist);
 
         Cinta cinta = new Cinta();
 
         Interno1 interno1 = new Interno1(depProd, cinta);
-        Interno interno2 = new Interno(Interno.TipoInterno.I2);
+        Interno2 interno2 = new Interno2(depDist, cinta);
 
 
 
@@ -42,6 +42,7 @@ public class Fabrica {
         productorB1.start();
         productorB2.start();
         interno1.start();
+        interno2.start();
         // for (int i = 0; i < numProductos; i++) {
         //     depProd.agarrarProducto();
         // }

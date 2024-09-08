@@ -27,7 +27,7 @@ public class Distribuidor extends Thread{
 
     @Override
     public String toString() {
-        return "Distribuidor [tipo=" + tipo + "]";
+        return "" + tipo + "";
     }
 
     private void agarrarDepPDist() {
