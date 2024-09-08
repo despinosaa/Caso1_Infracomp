@@ -21,7 +21,7 @@ public class Interno1 extends Thread {
                 System.out.println("Interno1 ha encontrado los 4 FIN");
                 System.out.println("******************************");
             }
-            yield();
+            Thread.yield();
         }
     }
     
