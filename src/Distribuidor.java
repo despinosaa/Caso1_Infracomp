@@ -7,10 +7,13 @@ public class Distribuidor {
 
     // Atributos
     private TipoDistribuidor tipo;
+    private DepositoDistribucion depDist;
+
 
     // Constructor
-    public Distribuidor(TipoDistribuidor tipo) {
+    public Distribuidor(TipoDistribuidor tipo, DepositoDistribucion depDist) {
         this.tipo = tipo;
+        this.depDist = depDist;
     }
     
     // Getters y Setters

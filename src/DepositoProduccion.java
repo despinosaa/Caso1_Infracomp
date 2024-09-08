@@ -28,7 +28,6 @@ public class DepositoProduccion {
     
     public synchronized void agregarProducto(Producto producto) {
         while (capDepProd == productos.size()) {
-
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -42,7 +41,6 @@ public class DepositoProduccion {
 
     public synchronized Producto agarrarProducto() {
         Producto producto;
-
         if (0 == productos.size()) {
             return null;
         }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Cinta {
     
     // Constante
-    private static final int capacidad = 4; // regresar a 1 para funcionamiento normal !!!
+    private static final int capacidad = 1; // regresar a 1 para funcionamiento normal !!!
     private ArrayList<Producto> productos = new ArrayList();
 
     @Override
@@ -13,7 +13,6 @@ public class Cinta {
 
     public synchronized Producto agarrarProducto() {
         Producto producto;
-
         if (0 == productos.size()) {
             return null;
         }
