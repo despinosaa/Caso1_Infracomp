@@ -24,7 +24,7 @@ public class Productor extends Thread {
     }
     
     private void crearProductos() {
-        for (int i = 0; i < numProductos-1; i++) {
+        for (int i = 0; i < numProductos; i++) {
             Producto producto = new Producto(Producto.TipoProducto.valueOf(tipo.toString()));
             System.out.println("Se ha creado: "+producto);
             this.depProd.agregarProducto(producto);
