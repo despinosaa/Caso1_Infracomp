@@ -44,7 +44,7 @@ public class Distribuidor extends Thread{
                 if((producto.getTipo() == Producto.TipoProducto.FIN_A) || (producto.getTipo() == Producto.TipoProducto.FIN_B)){
                     continuar = false;
                     Producto.TipoProducto tipoproducto = producto.getTipo();
-                    System.out.println("El Distribuidor " + tipo + " ha encontrado " + tipoproducto + " y ha terminado.");
+                    System.out.println("/// El Distribuidor " + tipo + " ha encontrado " + tipoproducto + " y ha terminado. ///");
                 }
             }
         }

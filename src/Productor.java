@@ -32,6 +32,7 @@ public class Productor extends Thread {
         Producto producto = new Producto(Producto.TipoProducto.valueOf("FIN_"+tipo.toString()));
         System.out.println("Se ha creado: "+producto);
         this.depProd.agregarProducto(producto);
+        System.out.println("/// El Productor " + tipo + " ha terminado. ///");
     }
 
     @Override
