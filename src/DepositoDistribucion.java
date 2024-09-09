@@ -1,11 +1,11 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DepositoDistribucion {
     
     // Atributos
     private int capDepDist;
-    private ArrayList<Producto> productosA = new ArrayList();
-    private ArrayList<Producto> productosB = new ArrayList<>();
+    private Queue<Producto> productos = new LinkedList<>();
 
     // Constructor
     public DepositoDistribucion(int capDepDist) {
@@ -27,52 +27,43 @@ public class DepositoDistribucion {
     }
     
     public synchronized void agregarProducto(Producto producto){
-        while (capDepDist == (productosA.size() + productosB.size())) {
+        while (capDepDist == productos.size()) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        if (producto.getTipo() == Producto.TipoProducto.A || producto.getTipo() == Producto.TipoProducto.FIN_A) {
-            productosA.add(producto);
-        } else if (producto.getTipo() == Producto.TipoProducto.B || producto.getTipo() == Producto.TipoProducto.FIN_B) {
-            productosB.add(producto);
-        }
+        productos.add(producto);
         System.out.println("Al DEPÓSITO DE DISTRIBUCIÓN se ha agregado: " + producto);
         notifyAll();
     }
 
     public synchronized Producto agarrarProducto(Distribuidor distribuidor){
-        if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.A) {
-            while (productosA.size() == 0) {  
-                try {
-                    wait();  
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        while(productos.size() == 0) {  
+            try {
+                wait();  
+            } catch (InterruptedException e) {
+                e.printStackTrace();
                 }
-            }
-            Producto producto = productosA.get(0);
-            productosA.remove(0);
-            System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
-            notifyAll();  
-            return producto;
         }
-    
-        if (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.B) {
-            while (productosB.size() == 0) {  
-                try {
-                    wait();  
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            Producto producto = productosB.get(0);
-            productosB.remove(0);
-            System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
-            notifyAll();  
-            return producto;
+        
+        if((productos.peek().getTipo() == Producto.TipoProducto.A || productos.peek().getTipo() == Producto.TipoProducto.FIN_A)
+            && (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.A)){
+                Producto producto = productos.poll();
+                System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
+                notifyAll();
+                return producto;
+        }
+        
+        if((productos.peek().getTipo() == Producto.TipoProducto.B || productos.peek().getTipo() == Producto.TipoProducto.FIN_B)
+            && (distribuidor.getTipo() == Distribuidor.TipoDistribuidor.B)){
+                Producto producto = productos.poll();
+                System.out.println("Del DEPÓSITO DE DISTRIBUCIÓN se ha agarrado: " + producto);
+                notifyAll();
+                return producto;
         }
         return null;
     }
+
 }
