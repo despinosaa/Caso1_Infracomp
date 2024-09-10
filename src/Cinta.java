@@ -33,7 +33,7 @@ public class Cinta {
             }
         }
         productos.add(producto);
-        System.out.println("De la CINTA se ha agregado: "+producto);
+        System.out.println("A la CINTA se ha agregado: "+producto);
         notifyAll();
     }
 }
