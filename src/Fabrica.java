@@ -35,8 +35,6 @@ public class Fabrica {
         Interno1 interno1 = new Interno1(depProd, cinta);
         Interno2 interno2 = new Interno2(depDist, cinta);
 
-
-
         productorA1.start();
         productorA2.start();
         productorB1.start();
@@ -47,15 +45,6 @@ public class Fabrica {
         distribuidorB2.start();
         interno1.start();
         interno2.start();
-
-        // for (int i = 0; i < numProductos; i++) {
-        //     depProd.agarrarProducto();
-        // }
-
-        // while (true) {
-        //     depProd.agarrarProducto();
-        //     Thread.yield();
-        // }
 
     }
 }
