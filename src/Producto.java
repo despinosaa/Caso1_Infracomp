@@ -2,7 +2,7 @@ public class Producto {
 
     // Tipo producto
     public enum TipoProducto {
-        A, B
+        A, FIN_A, B, FIN_B
     } 
 
     // Atributos
@@ -24,7 +24,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto [tipo=" + tipo + "]";
+        return "" + tipo + "";
     }
 
 }

@@ -1,4 +1,4 @@
-public class Distribuidor {
+public class Distribuidor extends Thread{
     
     // Tipo productor
     public enum TipoDistribuidor {
@@ -7,10 +7,13 @@ public class Distribuidor {
 
     // Atributos
     private TipoDistribuidor tipo;
+    private DepositoDistribucion depDist;
+
 
     // Constructor
-    public Distribuidor(TipoDistribuidor tipo) {
+    public Distribuidor(TipoDistribuidor tipo, DepositoDistribucion depDist) {
         this.tipo = tipo;
+        this.depDist = depDist;
     }
     
     // Getters y Setters
@@ -24,7 +27,26 @@ public class Distribuidor {
 
     @Override
     public String toString() {
-        return "Distribuidor [tipo=" + tipo + "]";
+        return "" + tipo + "";
     }
-    
+
+    @Override
+    public void run() {
+        consumirProductos();
+    }
+
+    private void consumirProductos() {
+        boolean continuar = true;
+        while(continuar){
+            Producto producto = depDist.agarrarProducto(this);
+            if(producto != null){
+                System.out.println("El Distribuidor " + tipo + " ha retirado: " + producto);
+                if((producto.getTipo() == Producto.TipoProducto.FIN_A) || (producto.getTipo() == Producto.TipoProducto.FIN_B)){
+                    continuar = false;
+                    Producto.TipoProducto tipoproducto = producto.getTipo();
+                    System.out.println("/// El Distribuidor " + tipo + " ha encontrado " + tipoproducto + " y ha terminado. ///");
+                }
+            }
+        }
+    }
 }
